@@ -11,6 +11,8 @@ import Food from "./api/food"
 import User from "./api/user"
 import Menu from "./api/menu"
 import Restaurant from "./api/restaurant"
+import Order from "./api/order"
+import Review from "./api/review"
 
 
 dotenv.config();
@@ -35,6 +37,8 @@ zomato.use("/food",Food);
 zomato.use("/restaurant",Restaurant);
 zomato.use("/user",User);
 zomato.use("/menu",Menu);
+zomato.use("/order",Order);
+zomato.use("/review",Review);
 
 //  /auth /singup
 zomato.listen(PORT,()=>{

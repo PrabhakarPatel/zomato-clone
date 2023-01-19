@@ -31,7 +31,7 @@ router.get("/r/:id",async(req,res)=>{
     try{
         const {_id}=req.params;
         const foods = await FoodModel.find({
-            resturant:_id,
+            restaurant:_id,
         })
         return res.json({foods})
     }catch(error){
