@@ -1,7 +1,7 @@
 import  express, { Router } from "express"
 import { ImageModel } from "../../database/image";
 import { MenuModel } from "../../database/menu";
-
+import { validateId } from "../../validation/common.validation";
 const router = express.Router();
 /*
 =>Route  : /list/:_id
@@ -13,6 +13,7 @@ const router = express.Router();
 router.get("/list/:_id",async(req,res)=>{
     try{
         const {_id }=req.params
+        await validateId(req.params);
         const menus =await MenuModel.findById(_id);
         if(!menus){
             return res.status(404).json({error:"no menu present for this resturant"})
