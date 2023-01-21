@@ -3,6 +3,7 @@ import dotenv from "dotenv"
 import passport from "passport"
 import PrivateRouteConfig from "./config/route.config"
 import session from "express-session"
+import googleAuthConfig from "./config/google.config"
 //database connection
 
 import connectDB from "./database/connection";
@@ -18,9 +19,10 @@ import Image from "./api/image"
 
 dotenv.config();
 
+PrivateRouteConfig(passport);
+googleAuthConfig(passport);
 
 const zomato =express();
-PrivateRouteConfig(passport);
 
 zomato.use(express.json());
 zomato.use(session({secret:"ZomatoApp"}))
