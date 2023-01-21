@@ -1,6 +1,7 @@
 import express, { Router } from "express"
 import { UserModel } from "../../database/allModels"
 import { validateSignin, validateSignup } from "../../validation/auth.validation";
+import passport from "passport"
 const router =express.Router();
 
 router.post("/singup",async(req,res)=>{
@@ -25,5 +26,17 @@ router.post("/singin",async(req,res)=>{
     }
 
 })
+//google auth here
+router.get("/google",passport.authenticate("google",{
+    scope:[
+        "https://www.googleapis.com/auth/userinfo.profile",
+        "https://www.googleapis.com/auth/userinfo.email",
+    ],
+}))
+router.get("/google/callback",passport.authenticate("google",{failureRedirect:"/"}),
+(req,res)=>{
+    return res.status(200).json({token:req.session.passport.user.token})
+}
+)
 
 export default Router;
