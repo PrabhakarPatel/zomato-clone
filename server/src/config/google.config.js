@@ -1,8 +1,8 @@
-import googleAuth from "passport-google-oauth2"
+import googleOAuth from "passport-google-oauth2"
 import  {UserModel}  from "../database/allModels"
 // import passport from "passport";
 
-const  GoogleStrategy = googleAuth.Strategy;
+const  GoogleStrategy = googleOAuth.Strategy;
 export default (passport)=>{
     passport.use(
         new GoogleStrategy({

@@ -1,11 +1,11 @@
-import express, { Router } from "express"
+import express from "express"
 import AWS from "aws-sdk"
 import multer from "multer"
 
 import { ImageModel } from "../../database/allModels"
 
 import {s3Upload} from "../../utils/s3"
-const router = express.Router();
+const Router = express.Router();
 //configure multer
 const storage = multer.memoryStorage();
 const upload = multer({storage}); //dynamic one
@@ -18,7 +18,7 @@ const upload = multer({storage}); //dynamic one
 =>access : public
 =>method : get
 */
-router.get("/:_id",async(req,res)=>{
+Router.get("/:_id",async(req,res)=>{
 try {
 const image =await ImageModel.findById(req.params)
 return res.json({image})
@@ -34,7 +34,7 @@ return res.json({image})
 =>access : public
 =>method : post
 */
-router.post("/",upload.single("file"),async(req,res)=>{
+Router.post("/",upload.single("file"),async(req,res)=>{
     try {
         const file =req.file 
         const bucketOptions ={

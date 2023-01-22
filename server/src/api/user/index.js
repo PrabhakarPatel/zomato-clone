@@ -1,8 +1,8 @@
-import express, { Router } from "express"
+import express from "express"
 import { UserModel } from "../../database/allModels"
 import passport from "passport";
 
-const  router = express.Router();
+const  Router = express.Router();
 
 
 /*
@@ -13,7 +13,7 @@ const  router = express.Router();
 =>method : get
 */
 
-router.get("/",passport.authenticate("jwt",{session:false}),async(req,res)=>{
+Router.get("/",passport.authenticate("jwt",{session:false}),async(req,res)=>{
     try{
         const {email,fullName,phoneNumber,address}= req.user
         return res.json({user :{email,fullName,phoneNumber,address}});
@@ -30,7 +30,7 @@ router.get("/",passport.authenticate("jwt",{session:false}),async(req,res)=>{
 =>access : public
 =>method : get
 */
- router.get("/:_id",async(req,res)=>{
+ Router.get("/:_id",async(req,res)=>{
     try{
         const {_id}=req.params;
         const getUser =await UserModel.findById(_id)
@@ -51,7 +51,7 @@ router.get("/",passport.authenticate("jwt",{session:false}),async(req,res)=>{
 =>access : private
 =>method : put
 */
-router.put("/update/:_id",passport.authenticate("jwt",{session:false}),async(req,res)=>{
+Router.put("/update/:_id",passport.authenticate("jwt",{session:false}),async(req,res)=>{
     try{
         const {_id}=req.params;
         const {userData}=req.body;

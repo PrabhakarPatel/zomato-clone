@@ -1,8 +1,8 @@
-import  express, { Router }  from "express";
+import  express from "express";
 import { FoodModel } from "../../database/allModels";
 import { validateCategory, validateId } from "../../validation/common.validation";
 
-const router = express.Router();
+const Router = express.Router();
 
 /*
 =>Route  : /:_id
@@ -11,7 +11,7 @@ const router = express.Router();
 =>access : public
 =>method : get
 */
-router.get("/:id",async(req,res)=>{
+Router.get("/:id",async(req,res)=>{
     try{
         const {_id}=req.params;
         await validateId(req.params);
@@ -29,7 +29,7 @@ router.get("/:id",async(req,res)=>{
 =>access : public
 =>method : get
 */
-router.get("/r/:id",async(req,res)=>{
+Router.get("/r/:id",async(req,res)=>{
     try{
         const {_id}=req.params;
         await validateId(req.params);
@@ -48,7 +48,7 @@ router.get("/r/:id",async(req,res)=>{
 =>access : public
 =>method : get
 */
-router.get("/c/:category",async(req,res)=>{
+Router.get("/c/:category",async(req,res)=>{
     try{
         const {category}=req.params;
         await validateCategory(req.params);

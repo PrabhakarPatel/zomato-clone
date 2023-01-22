@@ -7,7 +7,7 @@ export const validateId =(id)=>{
   })
   return Schema.validateAsync(id); 
 }
-export const validateCategory =(id)=>{
+export const validateCategory =(category)=>{
   const Schema= joi.object({
     category: joi.string().required(),
 
@@ -19,6 +19,6 @@ export const validateSearchString =(SearchString)=>{
     SearchString: joi.string().required(),
 
   })
-  return Schema.validateAsync(category); 
+  return Schema.validateAsync(SearchString); 
 }
 

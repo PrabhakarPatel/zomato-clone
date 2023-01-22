@@ -1,7 +1,7 @@
-import express, { Router } from "express"
+import express from "express"
 import { ReviewModel } from "../../database/allModels";
 import passport from "passport";
-const  router = express.Router();
+const  Router = express.Router();
 
 /*
 =>Route  : /:resId
@@ -10,7 +10,7 @@ const  router = express.Router();
 =>access : public
 =>method : get
 */
-router.get("/:resId",async(req,res)=>{
+Router.get("/:resId",async(req,res)=>{
     try{
     const {resId}= req.params
     const reviews = await ReviewModel.find({restaurants:resId}).sort({createdAt: -1})
@@ -29,7 +29,7 @@ router.get("/:resId",async(req,res)=>{
 =>access : public
 =>method : post
 */
-router.post("/new",passport.authenticate("jwt",{session:false}),async(req,res)=>{
+Router.post("/new",passport.authenticate("jwt",{session:false}),async(req,res)=>{
     try{
     const {_id}=req.user;
     const {reviewData}=req.body;
@@ -48,7 +48,7 @@ router.post("/new",passport.authenticate("jwt",{session:false}),async(req,res)=>
 =>access : private
 =>method : post
 */
-router.delete("/delete/:id",passport.authenticate("jwt",{session:false}),async(req,res)=>{
+Router.delete("/delete/:id",passport.authenticate("jwt",{session:false}),async(req,res)=>{
     try{
     const {user}=req;
     const {id}=req.params;

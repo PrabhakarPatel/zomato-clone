@@ -1,8 +1,8 @@
-import express, { Router } from "express"
+import express from "express"
 import passport from "passport";
 import { OrderModel } from "../../database/order";
 
-const  router = express.Router();
+const  Router = express.Router();
 
 /*
 =>Route  : /
@@ -11,7 +11,7 @@ const  router = express.Router();
 =>access : private
 =>method : get
 */
-router.get("/:_id",passport.authenticate("jwt",{session:false}),async(req,res)=>{
+Router.get("/:_id",passport.authenticate("jwt",{session:false}),async(req,res)=>{
     try{
         const {user}=req.user;
         const getOrders = await OrderModel.findOne({user : user._id});
@@ -32,7 +32,7 @@ router.get("/:_id",passport.authenticate("jwt",{session:false}),async(req,res)=>
 =>access : private
 =>method : put
 */
-router.put("/new",passport.authenticate("jwt",{session:false}),async(req,res)=>{
+Router.put("/new",passport.authenticate("jwt",{session:false}),async(req,res)=>{
     try{
       const {user} = req;
       const {orderDetails}=req.body;

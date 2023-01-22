@@ -1,8 +1,8 @@
-import  express, { Router }  from "express";
+import  express  from "express";
 import { RestaurantModel } from "../../database/allModels";
 import {  validateId, validateSearchString } from "../../validation/common.validation";
 
-const router = express.Router();
+const Router = express.Router();
 
 /*
 =>Route  : /
@@ -11,7 +11,7 @@ const router = express.Router();
 =>access : public
 =>method : get
 */
-router.get("/",async(req,res)=>{
+Router.get("/",async(req,res)=>{
     try{
         const {city} = req.query;
         const restaurants= await RestaurantModel.find({city})
@@ -31,7 +31,7 @@ router.get("/",async(req,res)=>{
 =>access : public
 =>method : get
 */
-router.get("/:_id",async(req,res)=>{
+Router.get("/:_id",async(req,res)=>{
     try{
         const {_id}=req.params;
         
@@ -52,7 +52,7 @@ router.get("/:_id",async(req,res)=>{
 =>access : public
 =>method : get
 */
-router.get("/search/:searching",async(req,res)=>{
+Router.get("/search/:searching",async(req,res)=>{
     try{
       const {searchString}=req.params
       await validateSearchString(req.params)

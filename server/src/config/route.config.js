@@ -1,14 +1,14 @@
-import { Router } from "express";
+
 import JwtPassport from "passport-jwt";
 import { UserModel } from "../database/allModels";
 
-const JWTStrategy= JwtPassport.Strategy;
-const ExtraJWT = JwtPassport.ExtractJwt;
+const JWTStrategy = JwtPassport.Strategy;
+const ExtractJWT = JwtPassport.ExtractJwt;
 
 //Authorization "bearer sometokenstring"
 
 const options= {
-    jwtFromRequest:ExtraJWT.fromAuthHeaderAsBearerToken(),
+    jwtFromRequest:ExtractJWT.fromAuthHeaderAsBearerToken(),
     secretOrKey:"ZomatoApp",
 }
 export default(passport)=>{

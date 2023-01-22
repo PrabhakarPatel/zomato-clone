@@ -1,10 +1,10 @@
-import express, { Router } from "express"
+import express from "express"
+import passport from "passport"
 import { UserModel } from "../../database/allModels"
 import { validateSignin, validateSignup } from "../../validation/auth.validation";
-import passport from "passport"
-const router =express.Router();
+const Router =express.Router();
 
-router.post("/singup",async(req,res)=>{
+Router.post("/singup",async(req,res)=>{
     try{
         await validateSignup(req.body.credentials);
         await UserModel.findByEmailAndPhone(req.body.credentials)
@@ -15,7 +15,7 @@ router.post("/singup",async(req,res)=>{
         return res.status(500).json({status:"failed",error: error.message})
     }
 })
-router.post("/singin",async(req,res)=>{
+Router.post("/singin",async(req,res)=>{
     try{
         await validateSignin(req.body.credentials);
         const user=await UserModel.findByEmailAndPassword(req.body.credentials)
@@ -27,15 +27,15 @@ router.post("/singin",async(req,res)=>{
 
 })
 //google auth here
-router.get("/google",passport.authenticate("google",{
+Router.get("/google",passport.authenticate("google",{
     scope:[
         "https://www.googleapis.com/auth/userinfo.profile",
         "https://www.googleapis.com/auth/userinfo.email",
     ],
 }))
-router.get("/google/callback",passport.authenticate("google",{failureRedirect:"/"}),
+Router.get("/google/callback",passport.authenticate("google",{failureRedirect:"/"}),
 (req,res)=>{
-    return res.status(200).json({token:req.session.passport.user.token})
+    return res.status(200).json({token:req.session.passport.user.token,})
 }
 )
 
